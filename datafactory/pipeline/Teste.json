@@ -1,0 +1,55 @@
+{
+	"name": "Teste",
+	"properties": {
+		"activities": [
+			{
+				"name": "le dados",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/d34dk3nn3ds@hotmail.com/azuremalandro/Notebooks Databricks/Leitura de arquivo do ADLS"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "grava parquet",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "le dados",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/d34dk3nn3ds@hotmail.com/azuremalandro/Notebooks Databricks/Gera arquivos Parquet no ADLS"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
